@@ -1,15 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Techno-Motors-3</string>
-    <string name="menu_home">Главная</string>
-    <string name="menu_auto">Автосалон</string>
-    <string name="menu_service">Сервис</string>
-    <string name="menu_contacts">Контакты</string>
-
-    <string-array name="item_menu_service_fragment">
+    <string-array name="item_menu_car_fragment">
         <item>Запись на ТО</item>
         <item>Калькулятор ТО</item>
         <item>Запись на ремонт</item>
         <item>Рекомендуемые расходные материалы</item>
         <item>Заправочные объемы</item>
+
     </string-array>
+
+
+
+
+
 </resources>
