@@ -1,7 +1,11 @@
 package com.example.techno_motors_3.ui.fragmentAuto
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 
 class AutoViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+
+   fun selectedItemMenu(itemMenu: Int){
+       Log.d("@@@", "getView: AutoViewModel" + itemMenu)
+   }
 }

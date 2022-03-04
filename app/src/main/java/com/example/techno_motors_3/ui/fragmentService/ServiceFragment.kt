@@ -10,6 +10,15 @@ import com.example.techno_motors_3.R
 
 class ServiceFragment : Fragment() {
 
+    // ВАЖНО - количество картинок должно быть = количеству пунктов меню
+    var myIcon = intArrayOf(
+        R.drawable.service_item_1,
+        R.drawable.service_item_2,
+        R.drawable.service_item_3,
+        R.drawable.service_item_4,
+        R.drawable.service_item_5
+    )
+
     companion object {
         fun newInstance() = ServiceFragment()
     }

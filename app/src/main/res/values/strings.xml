@@ -5,11 +5,72 @@
     <string name="menu_service">Сервис</string>
     <string name="menu_contacts">Контакты</string>
 
-    <string-array name="item_menu_service_fragment">
-        <item>Запись на ТО</item>
-        <item>Калькулятор ТО</item>
-        <item>Запись на ремонт</item>
-        <item>Рекомендуемые расходные материалы</item>
-        <item>Заправочные объемы</item>
+
+    <string-array name="item_menu_model_list">
+        <item>Rio FB(III поколение)</item>
+        <item>Rio (IV поколение реслайлинг)</item>
+        <item>Rio X</item>
+        <item>Ceed JD (II поколение)</item>
+        <item>Ceed CD (III поколение)</item>
+        <item>Cerato</item>
+        <item>Optima</item>
+        <item>Optima GT</item>
+        <item>K5</item>
+        <item>Soul</item>
+        <item>Seltos</item>
+        <item>Sportage QL(III поколение) </item>
+        <item>Sorento XM</item>
+        <item>Sorento Prime</item>
+        <item>Sorento MQ4</item>
+        <item>Stinger</item>
+        <item>Mohave</item>
     </string-array>
+
+    <string-array name="item_year">
+        <item>2016</item>
+        <item>2017</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+        <item>2021</item>
+    </string-array>
+
+    <string-array name="item_TO">
+        <item>ТО 1 (15 000 км или 1 год)</item>
+        <item>ТО 2 (30 000 км или 2 года)</item>
+        <item>ТО 3 (45 000 км или 3 года)</item>
+        <item>ТО 4 (60 000 км или 4 года)</item>
+        <item>ТО 5 (30 000 км или 5 лет)</item>
+        <item>ТО 6 (45 000 км или 6 лет)</item>
+        <item>Индивидуальный</item>
+    </string-array>
+
+    <string-array name="item_time">
+        <item>8:00</item>
+        <item>8:30</item>
+        <item>9:00</item>
+        <item>9:30</item>
+        <item>10:00</item>
+        <item>10:30</item>
+        <item>11:00</item>
+        <item>11:30</item>
+        <item>12:00</item>
+        <item>12:30</item>
+        <item>13:00</item>
+        <item>13:30</item>
+        <item>14:00</item>
+        <item>14:30</item>
+        <item>15:00</item>
+        <item>15:30</item>
+        <item>16:00</item>
+        <item>16:30</item>
+        <item>17:00</item>
+        <item>17:30</item>
+        <item>18:00</item>
+        <item>18:30</item>
+        <item>19:00</item>
+
+
+    </string-array>
+
 </resources>
