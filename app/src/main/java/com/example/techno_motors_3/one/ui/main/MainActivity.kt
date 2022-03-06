@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.ActivityMainBinding
+import com.example.techno_motors_3.one.MyApp
 import com.example.techno_motors_3.one.ui.fragmentAuto.AutoFragment
 import com.example.techno_motors_3.one.ui.fragmentHome.HomeFragment
 import com.example.techno_motors_3.one.ui.fragmentService.ServiceFragment
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
         launchFragment(homeFragment)
         initBottomNavigation()
+
+        MyApp.myAppInstance.getRepoPromotions().mockRepo() // test repo
     }
 
     private fun launchFragment(fragment: Fragment) {

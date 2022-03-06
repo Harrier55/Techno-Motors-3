@@ -15,7 +15,7 @@
 
     <style name="TextViewPromotionDiscount" parent="TextViewPrimary">
         <item name="android:layout_gravity">start</item>
-        <item name="android:textColor">@color/purple_200</item>
+        <item name="android:textColor">#E91E63</item>
     </style>
 
     <style name="TextViewPromotionDescription" parent="TextViewPrimary">

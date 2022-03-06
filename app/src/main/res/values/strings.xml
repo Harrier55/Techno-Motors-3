@@ -4,6 +4,7 @@
     <string name="menu_auto">Автосалон</string>
     <string name="menu_service">Сервис</string>
     <string name="menu_contacts">Контакты</string>
+    <string name="promotion_button_text">записаться</string>
 
 
     <string-array name="item_menu_model_list">
