@@ -1,13 +1,13 @@
-package com.example.techno_motors_3.ui.main
+package com.example.techno_motors_3.one.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.ActivityMainBinding
-import com.example.techno_motors_3.ui.fragmentAuto.AutoFragment
-import com.example.techno_motors_3.ui.fragmentHome.HomeFragment
-import com.example.techno_motors_3.ui.fragmentService.ServiceFragment
+import com.example.techno_motors_3.one.ui.fragmentAuto.AutoFragment
+import com.example.techno_motors_3.one.ui.fragmentHome.HomeFragment
+import com.example.techno_motors_3.one.ui.fragmentService.ServiceFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         launchFragment(homeFragment)
         initBottomNavigation()
-
-
     }
 
     private fun launchFragment(fragment: Fragment) {
@@ -36,7 +34,6 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, fragment)
             .commit()
     }
-
 
     private fun initBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener {

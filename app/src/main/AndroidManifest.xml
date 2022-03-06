@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TechnoMotors3">
         <activity
-            android:name=".ui.main.MainActivity"
+            android:name="com.example.techno_motors_3.one.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

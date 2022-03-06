@@ -1,8 +1,8 @@
-package com.example.techno_motors_3.ui.fragmentAuto
+package com.example.techno_motors_3.one.ui.fragmentAuto
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

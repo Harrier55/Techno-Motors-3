@@ -1,4 +1,4 @@
-package com.example.techno_motors_3.ui.fragmentAuto
+package com.example.techno_motors_3.one.ui.fragmentAuto
 
 import android.os.Bundle
 import android.view.LayoutInflater
