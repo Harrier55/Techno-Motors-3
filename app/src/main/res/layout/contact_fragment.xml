@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".one.ui.fragmentContact.ContactFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/techno_motors_360_270" />
+
+    <TextView
+        style="@style/TextViewContactTitle"
+        android:text="Адрес" />
+
+    <TextView
+        style="@style/ContactFragmentTextView"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="г. Челябинск, ул. Братьев Кашириных, д. 129д" />
+
+    <TextView
+        style="@style/TextViewContactTitle"
+        android:text="Телефоны" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_round_phone_24" />
+
+        <TextView
+            style="@style/TextViewContactDescription"
+            android:text="Автосалон" />
+
+        <TextView
+            style="@style/ContactFragmentTextView"
+            android:text="+7 (351) 225-60-59" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_round_phone_24" />
+
+        <TextView
+            style="@style/TextViewContactDescription"
+            android:text="Сервис" />
+
+        <TextView
+            style="@style/ContactFragmentTextView"
+            android:text="+7 (351) 796-22-20" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_round_phone_24" />
+
+        <TextView
+            style="@style/TextViewContactDescription"
+            android:text="Автомобили с пробегом" />
+
+        <TextView
+            style="@style/ContactFragmentTextView"
+            android:text="+7 (351) 225-60-59" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <TextView
+        style="@style/TextViewContactTitle"
+        android:text="E-mail" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextViewContactDescription"
+            android:text="Автосалон" />
+
+        <TextView
+            style="@style/ContactFragmentTextView"
+            android:text="example@techno-motors.ru" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextViewContactDescription"
+            android:text="Сервис" />
+
+        <TextView
+            style="@style/ContactFragmentTextView"
+            android:text="example@techno-motors.ru" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/TextViewContactDescription"
+            android:text="Поддержка клиентов" />
+
+        <TextView
+            style="@style/ContactFragmentTextView"
+            android:text="example@techno-motors.ru" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

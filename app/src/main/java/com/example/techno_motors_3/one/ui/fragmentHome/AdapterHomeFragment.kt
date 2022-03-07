@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.techno_motors_3.R
-import com.example.techno_motors_3.one.MyApp
 import com.example.techno_motors_3.one.domain.PromotionEntity
 
 class AdapterHomeFragment : RecyclerView.Adapter<AdapterHomeFragment.ViewHolder>() {

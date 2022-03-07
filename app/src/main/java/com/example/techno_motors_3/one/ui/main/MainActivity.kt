@@ -7,16 +7,18 @@ import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.ActivityMainBinding
 import com.example.techno_motors_3.one.MyApp
 import com.example.techno_motors_3.one.ui.fragmentAuto.AutoFragment
+import com.example.techno_motors_3.one.ui.fragmentContact.ContactFragment
 import com.example.techno_motors_3.one.ui.fragmentHome.HomeFragment
 import com.example.techno_motors_3.one.ui.fragmentService.ServiceFragment
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding:ActivityMainBinding
 
     private val fragmentManager by lazy { supportFragmentManager }
     private val homeFragment by lazy { HomeFragment() }
     private val autoFragment by lazy { AutoFragment() }
     private val serviceFragment by lazy { ServiceFragment() }
+    private val contactFragment by lazy { ContactFragment() }
 
     private val actionBar by lazy { this.supportActionBar}
 
@@ -43,7 +45,7 @@ class MainActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_home -> {
                     launchFragment(homeFragment)
-                    actionBar?.setTitle(R.string.app_name)
+                    actionBar?.setTitle(R.string.menu_home)
                     true
                 }
                 R.id.menu_auto -> {
@@ -58,6 +60,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.menu_contacts -> {
                     actionBar?.setTitle(R.string.menu_contacts)
+                    launchFragment(contactFragment)
                     true
                 }
                 else -> false
