@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_header"
+
+    style="@style/TextViewPromotionHeader"
+
+    android:text="@string/header_text_home_fragment" />

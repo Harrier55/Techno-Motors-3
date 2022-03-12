@@ -1,10 +1,11 @@
 <resources>
     <string name="app_name">Techno-Motors-3</string>
-    <string name="menu_home">Главная</string>
+    <string name="menu_home">Новости компании</string>
     <string name="menu_auto">Автосалон</string>
     <string name="menu_service">Сервис</string>
     <string name="menu_contacts">Контакты</string>
     <string name="promotion_button_text">записаться</string>
+    <string name="header_text_home_fragment">Наши акции</string>
 
 
     <string-array name="item_menu_model_list">
