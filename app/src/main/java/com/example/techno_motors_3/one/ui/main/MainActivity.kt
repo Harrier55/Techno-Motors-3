@@ -1,6 +1,7 @@
 package com.example.techno_motors_3.one.ui.main
 
 import android.os.Bundle
+import android.text.Html
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.techno_motors_3.R
@@ -26,12 +27,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        actionBar?.setTitle(R.string.app_name)
+        initBottomNavigation()
+        actionBar?.setTitle(R.string.menu_home)
+
 
         launchFragment(homeFragment)
-        initBottomNavigation()
 
-        MyApp.myAppInstance.getRepoPromotions().mockRepo() // test repo
+
+        MyApp.myAppInstance.getRepoPromotions().mockRepo() // create test repo
     }
 
     private fun launchFragment(fragment: Fragment) {

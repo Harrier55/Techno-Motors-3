@@ -25,6 +25,7 @@ class HomeFragment : Fragment() {
         myAdapter.refreshList(
             MyApp.myAppInstance.getRepoPromotions()
                 .getListPromotions() as ArrayList<PromotionEntity>
+
         )
 
     }
