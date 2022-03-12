@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_marginBottom="40dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        app:cardBackgroundColor="#f5f5f5"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="3dp">
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,13 +23,13 @@
                 android:id="@+id/promotion_title_tv"
                 style="@style/TextViewPromotionTitle"
                 android:layout_marginStart="16dp"
-                tools:text="Title promotion"/>
+                tools:text="Title promotion" />
 
             <TextView
                 android:id="@+id/promotion_discount_tv"
                 style="@style/TextViewPromotionDiscount"
                 android:layout_marginStart="16dp"
-                tools:text="discount promotion"/>
+                tools:text="discount promotion" />
 
             <ImageView
                 android:id="@+id/promotion_picture"
@@ -36,25 +37,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:src="@drawable/techno_motors_360_270"/>
+                android:src="@drawable/techno_motors_360_270" />
 
             <TextView
                 android:id="@+id/promotion_description_tv"
                 style="@style/TextViewPromotionDescription"
                 android:layout_marginStart="16dp"
-                tools:text="description"/>
+                tools:text="description" />
 
             <Button
                 android:id="@+id/promotion_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/promotion_button_text"
-                style="?attr/materialButtonOutlinedStyle"
-                android:textColor="@color/button_color"
-                app:strokeWidth = "2dp"
-                app:strokeColor = "@color/button_stroke_color"
-                />
+                style="@style/Button_item_promotions"
+                android:text="@string/promotion_button_text" />
 
         </LinearLayout>
 

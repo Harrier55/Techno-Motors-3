@@ -15,7 +15,7 @@
 
     <style name="TextViewPromotionDiscount" parent="TextViewPrimary">
         <item name="android:layout_gravity">start</item>
-        <item name="android:textColor">#E91E63</item>
+        <item name="android:textColor">@color/red</item>
     </style>
 
     <style name="TextViewPromotionDescription" parent="TextViewPrimary">
@@ -40,6 +40,16 @@
     <style name="TextViewContactDescription" parent="ContactFragmentTextView">
         <item name="android:layout_width">180dp</item>
         <item name="android:layout_marginLeft">8dp</item>
+    </style>
+
+    <style name="Button_item_promotions" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/button_color</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="strokeColor">@color/red</item>
+
     </style>
 
 
