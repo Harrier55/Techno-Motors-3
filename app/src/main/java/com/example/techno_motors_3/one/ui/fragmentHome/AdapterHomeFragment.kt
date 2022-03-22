@@ -14,6 +14,8 @@ import java.lang.IllegalArgumentException
 private const val TYPE_HEADER = 0
 private const val TYPE_ITEMS = 1
 
+/** В адаптере реализован Header, сейчас иам просто TextView, но можно что угодно поставить**/
+
 class AdapterHomeFragment : RecyclerView.Adapter<BaseViewHolder>() {
 
     private var promotionList: List<PromotionEntity> = mutableListOf()

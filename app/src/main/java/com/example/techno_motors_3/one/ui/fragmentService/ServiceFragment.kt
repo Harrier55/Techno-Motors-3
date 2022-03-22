@@ -4,35 +4,38 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.ListFragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.ServiceFragmentBinding
+import com.example.techno_motors_3.one.App
+
+
+/**  задача этого фрагмента - просто меню, которое переключает на другие фрагменты*/
+
+private const val WRITE_TO_SERVICE = 0
+private const val CALK_SERVICE = 1
+private const val WRITE_TO_REPAIR = 2
+private const val MATERIALS = 3
+private const val CAPACITY = 4
 
 class ServiceFragment : ListFragment() {
-    private var _binding:ServiceFragmentBinding? = null
+    private var _binding: ServiceFragmentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel by lazy{ViewModelProvider(this)[ServiceViewModel::class.java]}
-
-    /** ВАЖНО - количество картинок должно быть = количеству пунктов меню*/
-    var myIcon = intArrayOf(
-        R.drawable.service_item_1,
-        R.drawable.service_item_2,
-        R.drawable.service_item_3,
-        R.drawable.service_item_4,
-        R.drawable.service_item_5
-    )
+    private val viewModel by lazy { ViewModelProvider(this)[ServiceViewModel::class.java] }
+    private val adapter by lazy { ServiceAdapter(
+        requireContext(),
+        onItemClickListenerServiceFragment
+    ) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addListToListView()
-    }
-
-    private fun addListToListView(){
-        val mItem = resources.getStringArray(R.array.item_menu_service_fragment)
-        val arrayAdapter = ServiceAdapter(requireContext(),mItem,myIcon)
-//        val arrayAdapter = ArrayAdapter<String>(requireContext(),android.R.layout.simple_list_item_1,mItem)
-        binding.list.adapter = arrayAdapter
+        binding.list.adapter = adapter
+        viewModel.getMenu().observe(viewLifecycleOwner, Observer {
+            adapter.refreshListMenu(it)
+        })
     }
 
     override fun onCreateView(
@@ -45,12 +48,27 @@ class ServiceFragment : ListFragment() {
     }
 
     override fun onDestroy() {
-        _binding=null
+        _binding = null
         super.onDestroy()
     }
 
-    companion object {
-        fun newInstanceService() = ServiceFragment()
+    private val onItemClickListenerServiceFragment = object : OnItemClickListenerServiceFragment {
+        override fun onItemClick(position: Int) {
+            Toast.makeText(requireContext(), position.toString(), Toast.LENGTH_SHORT).show()
+            runSelectedItemMenu(position)
+        }
     }
+
+    fun runSelectedItemMenu(position: Int) {
+        val fragmentManager = activity?.supportFragmentManager
+        when (position) {
+            WRITE_TO_SERVICE -> {}
+            CALK_SERVICE -> {}
+            WRITE_TO_REPAIR -> {}
+            MATERIALS -> {}
+            CAPACITY -> {}
+        }
+    }
+
 
 }

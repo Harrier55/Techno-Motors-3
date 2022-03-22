@@ -33,7 +33,7 @@ class AutoAdapter(
 
 
         val convertView =
-            LayoutInflater.from(context).inflate(R.layout.item_auto_list, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.item_menu_list, parent, false)
 
         val menuIcon = convertView.findViewById<ImageView>(R.id.item_service_icon)
         val menuItem = convertView.findViewById<TextView>(R.id.item_service_text)

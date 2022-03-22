@@ -12,15 +12,20 @@ import com.example.techno_motors_3.R
 
 class ServiceAdapter(
     private val context: Context,
-    private val myItem: Array<String>,
-    private val myIcon: IntArray
+    private val onItemClickListenerServiceFragment: OnItemClickListenerServiceFragment
+
 ) : BaseAdapter() {
 
+    private var menuList: MutableList<List<Any>> = mutableListOf()
 
-    override fun getCount() = myItem.size
+    fun refreshListMenu(menuList: MutableList<List<Any>>){
+        this.menuList = menuList
+        notifyDataSetChanged()
+    }
+    override fun getCount() = menuList.size
 
     override fun getItem(position: Int): Any {
-        return myItem[position]
+        return menuList[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -32,16 +37,16 @@ class ServiceAdapter(
 
 
         val convertView =
-            LayoutInflater.from(context).inflate(R.layout.item_auto_list, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.item_menu_list, parent, false)
 
         val menuIcon = convertView.findViewById<ImageView>(R.id.item_service_icon)
         val menuItem = convertView.findViewById<TextView>(R.id.item_service_text)
 
-        menuIcon.setImageResource(myIcon[position])
-        menuItem.text = myItem[position]
+        menuIcon.setImageResource(menuList[position].getOrNull(0) as Int)
+        menuItem.text = context.resources.getString(menuList[position].getOrNull(1) as Int)
 
         menuItem.setOnClickListener {
-            //    onItemClickListenerAutoFragment.onItemClick(position)
+               onItemClickListenerServiceFragment.onItemClick(position)
         }
         return convertView
     }

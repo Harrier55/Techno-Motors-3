@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.HomeFragmentBinding
-import com.example.techno_motors_3.one.MyApp
+import com.example.techno_motors_3.one.App
 import com.example.techno_motors_3.one.domain.PromotionEntity
 
 class HomeFragment : Fragment() {
@@ -23,7 +23,7 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         myAdapter.refreshList(
-            MyApp.myAppInstance.getRepoPromotions()
+            App.myAppInstance.getRepoPromotions()
                 .getListPromotions() as ArrayList<PromotionEntity>
 
         )

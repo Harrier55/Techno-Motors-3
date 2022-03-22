@@ -1,12 +1,12 @@
 package com.example.techno_motors_3.one.ui.main
 
 import android.os.Bundle
-import android.text.Html
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.ActivityMainBinding
-import com.example.techno_motors_3.one.MyApp
+import com.example.techno_motors_3.one.App
 import com.example.techno_motors_3.one.ui.fragmentAuto.AutoFragment
 import com.example.techno_motors_3.one.ui.fragmentContact.ContactFragment
 import com.example.techno_motors_3.one.ui.fragmentHome.HomeFragment
@@ -30,11 +30,13 @@ class MainActivity : AppCompatActivity() {
         initBottomNavigation()
         actionBar?.setTitle(R.string.menu_home)
 
+        Log.d("@@@", "fragmentManager: ${fragmentManager.hashCode()}")
+
 
         launchFragment(homeFragment)
 
 
-        MyApp.myAppInstance.getRepoPromotions().mockRepo() // create test repo
+        App.myAppInstance.getRepoPromotions().mockRepo() // create test repo
     }
 
     private fun launchFragment(fragment: Fragment) {
