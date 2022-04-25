@@ -1,4 +1,4 @@
-package com.example.techno_motors_3.one.ui.fragmentService
+package com.example.techno_motors_3.one.ui.fragmentServiceMenu
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -12,7 +12,7 @@ import com.example.techno_motors_3.R
 
 class ServiceAdapter(
     private val context: Context,
-    private val onItemClickListenerServiceFragment: OnItemClickListenerServiceFragment
+    private val onItemClickListenerServiceFragment: OnItemClickListenerServiceFragmentAdapter
 
 ) : BaseAdapter() {
 
@@ -46,7 +46,7 @@ class ServiceAdapter(
         menuItem.text = context.resources.getString(menuList[position].getOrNull(1) as Int)
 
         menuItem.setOnClickListener {
-               onItemClickListenerServiceFragment.onItemClick(position)
+               onItemClickListenerServiceFragment.onItemClick(position+300)
         }
         return convertView
     }

@@ -1,4 +1,4 @@
-package com.example.techno_motors_3.one.ui.fragmentAuto
+package com.example.techno_motors_3.one.ui.fragmentAutoMenu
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

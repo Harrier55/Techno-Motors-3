@@ -1,10 +1,8 @@
-package com.example.techno_motors_3.one.ui.fragmentService
+package com.example.techno_motors_3.one.ui.fragmentServiceMenu
 
 import android.app.Application
-import androidx.annotation.NonNull
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.example.techno_motors_3.one.App
 
 private const val WRITE_TO_SERVICE = 0
@@ -31,8 +29,11 @@ class ServiceViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun runSelectedItemMenu(position:Int){
+
         when(position){
-            WRITE_TO_SERVICE ->{}
+            WRITE_TO_SERVICE ->{
+
+            }
             CALK_SERVICE ->{}
             WRITE_TO_REPAIR->{}
 

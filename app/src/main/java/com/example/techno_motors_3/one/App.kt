@@ -10,6 +10,7 @@ class App: Application() {
     private val resourceProvider by lazy { ResourceProvider(this) }
 
 
+
     override fun onCreate() {
         super.onCreate()
         myAppInstance = this

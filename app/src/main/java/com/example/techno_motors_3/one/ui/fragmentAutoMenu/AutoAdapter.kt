@@ -1,4 +1,4 @@
-package com.example.techno_motors_3.one.ui.fragmentAuto
+package com.example.techno_motors_3.one.ui.fragmentAutoMenu
 
 import android.annotation.SuppressLint
 import android.content.Context

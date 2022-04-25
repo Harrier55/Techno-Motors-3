@@ -1,4 +1,4 @@
-package com.example.techno_motors_3.one.ui.fragmentAuto
+package com.example.techno_motors_3.one.ui.fragmentAutoMenu
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,6 @@ import androidx.fragment.app.ListFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.AutoFragmentBinding
-import com.example.techno_motors_3.one.ui.fragmentService.ServiceFragment
 
 class AutoFragment : ListFragment() {
 

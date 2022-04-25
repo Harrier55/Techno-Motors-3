@@ -1,4 +1,4 @@
-package com.example.techno_motors_3.one.ui.fragmentService
+package com.example.techno_motors_3.one.ui.fragmentServiceMenu
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,25 +10,28 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.ServiceFragmentBinding
-import com.example.techno_motors_3.one.App
+import com.example.techno_motors_3.one.ui.main.OnClickNavigationFragment
 
 
 /**  задача этого фрагмента - просто меню, которое переключает на другие фрагменты*/
 
-private const val WRITE_TO_SERVICE = 0
-private const val CALK_SERVICE = 1
-private const val WRITE_TO_REPAIR = 2
-private const val MATERIALS = 3
-private const val CAPACITY = 4
+private const val WRITE_TO_SERVICE = 300
+private const val CALK_SERVICE = 301
+private const val WRITE_TO_REPAIR = 302
+private const val MATERIALS = 303
+private const val CAPACITY = 304
 
-class ServiceFragment : ListFragment() {
+class ServiceFragment(private val onClickNavigationFragment: OnClickNavigationFragment) :
+    ListFragment() {
     private var _binding: ServiceFragmentBinding? = null
     private val binding get() = _binding!!
     private val viewModel by lazy { ViewModelProvider(this)[ServiceViewModel::class.java] }
-    private val adapter by lazy { ServiceAdapter(
-        requireContext(),
-        onItemClickListenerServiceFragment
-    ) }
+    private val adapter by lazy {
+        ServiceAdapter(
+            requireContext(),
+            onItemClickListenerServiceFragment
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,17 +55,21 @@ class ServiceFragment : ListFragment() {
         super.onDestroy()
     }
 
-    private val onItemClickListenerServiceFragment = object : OnItemClickListenerServiceFragment {
-        override fun onItemClick(position: Int) {
-            Toast.makeText(requireContext(), position.toString(), Toast.LENGTH_SHORT).show()
-            runSelectedItemMenu(position)
-        }
-    }
+    private val onItemClickListenerServiceFragment =
+        object : OnItemClickListenerServiceFragmentAdapter {
+            override fun onItemClick(position: Int) {
 
-    fun runSelectedItemMenu(position: Int) {
-        val fragmentManager = activity?.supportFragmentManager
+//                runSelectedItemMenu(position)
+                onClickNavigationFragment.onClickMenuItemNavigation(position)
+            }
+        }
+
+    private fun runSelectedItemMenu(position: Int) {
+
         when (position) {
-            WRITE_TO_SERVICE -> {}
+            WRITE_TO_SERVICE -> {
+                Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+            }
             CALK_SERVICE -> {}
             WRITE_TO_REPAIR -> {}
             MATERIALS -> {}
