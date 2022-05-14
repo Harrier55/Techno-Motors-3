@@ -6,15 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
 import com.example.techno_motors_3.R
 
-class ContactFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = ContactFragment()
-    }
+class ContactFragment (private val actionBar: ActionBar): Fragment() {
 
     private lateinit var viewModel: ContactViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        actionBar.setTitle(R.string.title_contacts_fragment)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

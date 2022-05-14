@@ -6,13 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.HomeFragmentBinding
 import com.example.techno_motors_3.one.App
 import com.example.techno_motors_3.one.domain.PromotionEntity
 
-class HomeFragment : Fragment() {
+class HomeFragment(private val actionBar: ActionBar) : Fragment() {
 
     private var _binding: HomeFragmentBinding? = null
     private val binding get() = _binding!!
@@ -22,12 +23,11 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        actionBar.setTitle(R.string.title_home_fragment)
         myAdapter.refreshList(
             App.myAppInstance.getRepoPromotions()
                 .getListPromotions() as ArrayList<PromotionEntity>
-
         )
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

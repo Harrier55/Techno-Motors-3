@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:layout_marginTop="16dp"
     tools:context=".one.ui.fragmentWriteToservice.WriteToServiceFragment">
 
     <TextView
         android:id="@+id/tv_select_model"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:clickable="true"
@@ -32,36 +33,16 @@
         android:textColor="@color/black"
         android:focusable="true" />
 
-    <TextView
-        android:id="@+id/tv_select_date"
+
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:clickable="true"
-        android:hint="Выбрать дату"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:focusable="true" />
-
-    <TextView
-        android:id="@+id/tv_select_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:clickable="true"
-        android:hint="Выбрать время"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:focusable="true" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:text="Контактные данные"
-        android:gravity="center"
-        android:background="@color/gray_400"
+        android:layout_gravity="center"
+        android:textAllCaps = "false"
+        android:textSize="12sp"
         android:layout_marginTop="18dp"
         android:textColor="@color/black"
         />
@@ -87,21 +68,11 @@
         android:textColor="@color/black"
         />
 
-    <CheckBox
-        android:id="@+id/checkBox_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:checked="true"
-        android:text="Запомнить мой выбор"
-        />
+
 
     <Button
         android:id="@+id/button_send_form_TO"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center"
+        style="@style/Action_button"
         android:text="Отправить заявку"
         />
 

@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.AutoFragmentBinding
 
-class AutoFragment : ListFragment() {
+class AutoFragment(private val actionBar: ActionBar) : ListFragment() {
 
     private  var _binding:AutoFragmentBinding? = null
     private val binding get() = _binding!!
@@ -22,6 +23,11 @@ class AutoFragment : ListFragment() {
         R.drawable.car_item_4,
         R.drawable.car_item_5
     )
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        actionBar.setTitle(R.string.title_auto_fragment)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

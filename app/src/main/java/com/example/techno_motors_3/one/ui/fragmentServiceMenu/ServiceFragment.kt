@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.ListFragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,7 +22,8 @@ private const val WRITE_TO_REPAIR = 302
 private const val MATERIALS = 303
 private const val CAPACITY = 304
 
-class ServiceFragment(private val onClickNavigationFragment: OnClickNavigationFragment) :
+class ServiceFragment(private val actionBar: ActionBar,
+                      private val onClickNavigationFragment: OnClickNavigationFragment) :
     ListFragment() {
     private var _binding: ServiceFragmentBinding? = null
     private val binding get() = _binding!!
@@ -31,6 +33,11 @@ class ServiceFragment(private val onClickNavigationFragment: OnClickNavigationFr
             requireContext(),
             onItemClickListenerServiceFragment
         )
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        actionBar.setTitle(R.string.title_service_fragment)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,24 +65,11 @@ class ServiceFragment(private val onClickNavigationFragment: OnClickNavigationFr
     private val onItemClickListenerServiceFragment =
         object : OnItemClickListenerServiceFragmentAdapter {
             override fun onItemClick(position: Int) {
-
-//                runSelectedItemMenu(position)
                 onClickNavigationFragment.onClickMenuItemNavigation(position)
             }
         }
 
-    private fun runSelectedItemMenu(position: Int) {
 
-        when (position) {
-            WRITE_TO_SERVICE -> {
-                Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
-            }
-            CALK_SERVICE -> {}
-            WRITE_TO_REPAIR -> {}
-            MATERIALS -> {}
-            CAPACITY -> {}
-        }
-    }
 
 
 }

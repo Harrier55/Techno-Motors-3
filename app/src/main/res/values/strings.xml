@@ -1,13 +1,14 @@
 <resources>
     <string name="app_name">Techno-Motors-3</string>
-    <string name="menu_home">Новости</string>
-    <string name="menu_auto">Автосалон</string>
-    <string name="menu_service">АвтоСервис</string>
-    <string name="menu_contacts">Контакты</string>
+    <string name="title_home_fragment">Новости</string>
+    <string name="title_auto_fragment">Автосалон</string>
+    <string name="title_service_fragment">АвтоСервис</string>
+    <string name="title_contacts_fragment">Контакты</string>
+
     <string name="promotion_button_text">записаться</string>
     <string name="header_text_home_fragment">Наши акции</string>
 
-    <string name="write_to_service">Запись на ТО</string>
+    <string name="title_write_to_service_fragment">Запись на ТО</string>
     <string name="calc_service">Калькулятор ТО</string>
     <string name="write_to_repair">Запись на ремонт</string>
     <string name="materials">Рекомендуемые расходные материалы</string>
@@ -80,7 +81,7 @@
 
 
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

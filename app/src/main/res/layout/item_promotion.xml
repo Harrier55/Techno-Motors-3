@@ -49,7 +49,7 @@
 
             <Button
                 android:id="@+id/promotion_button"
-                style="@style/Button_item_promotions"
+                style="@style/Action_button"
                 android:text="@string/promotion_button_text" />
 
         </LinearLayout>

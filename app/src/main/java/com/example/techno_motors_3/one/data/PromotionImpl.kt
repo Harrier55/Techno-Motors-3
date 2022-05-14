@@ -7,6 +7,13 @@ class PromotionImpl : PromotionEntityContract {
 
 
     private val cashListPromotions: ArrayList<PromotionEntity> = ArrayList()
+    init {
+        /**  этот метод мы вызываем потому, что в такой реализации
+         * список начинает читаться не с 0 позиции
+         * нулевая позиция вычитается для Header
+         * мы добавляемпустую позицию в начало списка */
+        cashListPromotions.add(PromotionEntity())
+    }
 
 
     override fun createEntity(promotionEntity: PromotionEntity) {
@@ -20,38 +27,38 @@ class PromotionImpl : PromotionEntityContract {
     fun mockRepo() {
         createEntity(
             PromotionEntity(
-                "Промывка топливной системы, включая материалы и работу мастера",
-                "https://autoo.ru/img/uploads/profile/tehno-motors-chelyabinsk-2-y-mikrorayon-akadem-riversayd-1-600.jpg",
-                "1500 руб.",
-                "Акция действует только по понедельникам"
+                "Весенняя диагностика автомобиля",
+                "https://cdn.kia.ru/resize/410x275/media-bank/kia-tm/KIA_Inet_AdBanner_410x277_oldfrends.jpg",
+                "01 апреля - 30 апреля",
+                "Комплексная диагностика всего за 1000 руб*е"
             )
         )
         createEntity(
             PromotionEntity(
-                "Развал-схождение - проверка и регулировка углов установки колес",
-                "https://syktyvkar.cena-auto.ru/modules/image/src/images/cache/default_2310_22-940-587-07abfe4f.jpg",
-                "1680 руб.",
-                "Акция действует только по средам"
+                "Проверка и  углов установки колес",
+                "https://cdn.kia.ru/resize/410x275/media-bank/kia-tm/410_277.jpg",
+                "01 апреля - 30 апреля",
+                "Проверка углов установки колес за 0 рублей"
             )
         )
         createEntity(
             PromotionEntity(
-                "Счастливые часы в Техно-Моторс,\n" +
-                        "скидка на все работы",
-                "https://s3.eu-central-1.amazonaws.com/images.hipdir/302357/uigg0zfuwsrruhhg3prb7trpbad5zlue.jpg",
-                "Скидка15 %",
-                "Акция действует только по воскресениям"
+                "Антибактериальная обработка системы кондиционирования",
+                "https://cdn.kia.ru/resize/410x275/media-bank/kia-tm/410_277antibakterialnaya.jpg",
+                "01 апреля - 30 апреля",
+                "за 1100 руб"
             )
         )
         createEntity(
             PromotionEntity(
-                "Скидка на регламентное техническое обслуживание автомобилей KIA",
-                "https://autoo.ru/img/uploads/profile/tehno-motors-chelyabinsk-2-y-mikrorayon-akadem-riversayd-1-600.jpg",
-                "Скидка 10 %",
-                "Акция действует в текущем месяце"
+                "Помощь на дороге при прохождении ТО",
+                "https://cdn.kia.ru/resize/410x275/media-bank/kia-tm/KIA_Inet_AdBanner_410x277_RoadHelp_HR.jpg",
+                "01 апреля - 30 апреля",
+                "Помощь в непредвиденной ситуации"
             )
         )
-        createEntity(PromotionEntity("No internet", "", "SALE 15 %", "description"))
+        createEntity(PromotionEntity("No internet", "", "No internet", "description"))
+
     }
 
 

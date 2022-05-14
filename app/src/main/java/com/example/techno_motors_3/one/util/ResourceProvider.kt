@@ -9,7 +9,7 @@ class ResourceProvider(context: Context) {
     fun getMenuServiceFragment(): MutableList<List<Any>> {
          val listMenuServiceFragment = mutableListOf<List<Any>>()
 
-        listMenuServiceFragment.add(listOf(R.drawable.service_item_1, R.string.write_to_service))
+        listMenuServiceFragment.add(listOf(R.drawable.service_item_1, R.string.title_write_to_service_fragment))
         listMenuServiceFragment.add(listOf(R.drawable.service_item_2, R.string.calc_service))
         listMenuServiceFragment.add(listOf(R.drawable.service_item_3, R.string.write_to_repair))
         listMenuServiceFragment.add(listOf(R.drawable.service_item_4, R.string.write_to_repair))

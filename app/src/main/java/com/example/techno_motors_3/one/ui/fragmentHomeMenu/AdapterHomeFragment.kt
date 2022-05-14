@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.one.domain.PromotionEntity
 import java.lang.IllegalArgumentException
@@ -14,7 +15,7 @@ import java.lang.IllegalArgumentException
 private const val TYPE_HEADER = 0
 private const val TYPE_ITEMS = 1
 
-/** В адаптере реализован Header, сейчас иам просто TextView, но можно что угодно поставить**/
+/** В RecyclerView реализован Header, сейчас иам просто TextView, но можно что угодно поставить**/
 
 class AdapterHomeFragment : RecyclerView.Adapter<BaseViewHolder>() {
 
@@ -54,7 +55,9 @@ class AdapterHomeFragment : RecyclerView.Adapter<BaseViewHolder>() {
 
                 Glide.with(holder.itemView.context)
                     .load(promotionList[position].picture)
-                    .placeholder(R.drawable.techno_motors_360_270)
+ //                   .placeholder(R.drawable.techno_motors_360_270)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
                     .into(holder.picture)
             }
             is HeaderViewHolder ->{

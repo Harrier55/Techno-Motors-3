@@ -3,25 +3,25 @@
     <item
         android:id="@+id/menu_home"
         android:icon="@drawable/ic_baseline_home"
-        android:title="@string/menu_home" />
+        android:title="@string/title_home_fragment" />
 
 
     <item
         android:id="@+id/menu_auto"
         android:icon="@drawable/ic_baseline_directions_car_24"
-        android:title="@string/menu_auto" />
+        android:title="@string/title_auto_fragment" />
 
 
     <item
         android:id="@+id/menu_service"
         android:icon="@drawable/ic_baseline_car_repair_24"
-        android:title="@string/menu_service" />
+        android:title="@string/title_service_fragment" />
 
 
     <item
         android:id="@+id/menu_contacts"
         android:icon="@drawable/ic_baseline_location_on_24"
-        android:title="@string/menu_contacts" />
+        android:title="@string/title_contacts_fragment" />
 
 
 </menu>
