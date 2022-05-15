@@ -41,9 +41,14 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initBottomNavigation()
+        initRepo()
         actionBar.setTitle(R.string.title_home_fragment)
         launchFragment(homeFragment)
         App.myAppInstance.getRepoPromotions().mockRepo() // create test repo
+    }
+
+    private fun initRepo(){
+        App.myAppInstance.getCarEntityRepo().checkSavedStateCarEntity()
     }
 
     private fun launchFragment(fragment: Fragment) {
@@ -52,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    private fun launchFragmentWithPopToBackStack(fragment: Fragment, actionBarTitle: Int) {
+    private fun launchFragmentWithPopToBackStack(fragment: Fragment) {
         fragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(BACK_STACK_MAIN)

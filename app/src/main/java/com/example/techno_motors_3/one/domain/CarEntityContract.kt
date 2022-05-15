@@ -1,7 +1,9 @@
 package com.example.techno_motors_3.one.domain
 
 interface CarEntityContract {
-    fun createNewCar(carEntity: CarEntity)
-    fun loadCarFromPreferences():CarEntity
-    fun getCar():CarEntity
+    fun createNewCar(model: String, service_type: String)
+    fun updateCarEntity(carEntity: CarEntity)
+    fun getCar(): CarEntity
+    fun loadCarFromPreferences()
+    fun checkSavedStateCarEntity()
 }
