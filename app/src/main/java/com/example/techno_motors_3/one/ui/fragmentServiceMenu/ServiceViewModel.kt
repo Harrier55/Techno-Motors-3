@@ -13,8 +13,6 @@ private const val CAPACITY = 4
 
 class ServiceViewModel(application: Application) : AndroidViewModel(application) {
 
-
-
     private val menuList by lazy {
         App.myAppInstance.getResourceProvider().getMenuServiceFragment()
     }

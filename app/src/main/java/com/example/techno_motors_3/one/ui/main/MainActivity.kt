@@ -25,12 +25,13 @@ private const val CAPACITY = 304
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val fragmentManager by lazy { supportFragmentManager }
-//    private val actionBar by lazy { this.supportActionBar } // был вариант такой инициализации
-    private lateinit var actionBar:
-        androidx.appcompat.app.ActionBar
+
+    /**был вариант такой инициализации actionBar, но он потребовал проверки на null*/
+    //    private val actionBar by lazy { this.supportActionBar }
+    private lateinit var actionBar: androidx.appcompat.app.ActionBar
     private val homeFragment by lazy { HomeFragment(actionBar) }
     private val autoFragment by lazy { AutoFragment(actionBar) }
-    private val serviceFragment by lazy { ServiceFragment(actionBar,onClickNavigationFragment) }
+    private val serviceFragment by lazy { ServiceFragment(actionBar, onClickNavigationFragment) }
     private val contactFragment by lazy { ContactFragment(actionBar) }
     private val writeToServiceFragment by lazy { WriteToServiceFragment(actionBar) }
 
@@ -42,13 +43,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initBottomNavigation()
         initRepo()
-        actionBar.setTitle(R.string.title_home_fragment)
         launchFragment(homeFragment)
-        App.myAppInstance.getRepoPromotions().mockRepo() // create test repo
     }
 
-    private fun initRepo(){
+    private fun initRepo() {
+        /**первоначальная инициализация для проверки. Если есть данные в Preferences
+         * то грузим их, иначе создаем новый объект CarEntity*/
         App.myAppInstance.getCarEntityRepo().checkSavedStateCarEntity()
+
+        /**mock для репозитория Новости (первая страница)*/
+        App.myAppInstance.getRepoPromotions().mockRepo() // create test mock repo
     }
 
     private fun launchFragment(fragment: Fragment) {
@@ -67,11 +71,23 @@ class MainActivity : AppCompatActivity() {
     private fun navigationFragmentsMain(itemPositionNavi: Int) {
         when (itemPositionNavi) {
             WRITE_TO_SERVICE -> {
-                launchFragment(writeToServiceFragment)
+                launchFragmentWithPopToBackStack(writeToServiceFragment)
             }
         }
     }
 
+    /**ЛОГИКА ПЕРКЛЮЧЕНИЯ ФРАГМЕНТОВ*/
+
+    /**логика переключения такая - так как каждый список передает по клику какое то число
+     * от 0 до ..., и чтобы их разделить применим, если это, например ServiceFragment, то
+     * прибавляем + 300, таким образоим получается, что
+     * private const val WRITE_TO_SERVICE = 300
+     *
+     * аналогично с другими фрагментами
+     * Новости   +100
+     * Автосалон    +200*/
+
+    /** callback для навигации переключения фрагментов*/
     private val onClickNavigationFragment = object : OnClickNavigationFragment {
         override fun onClickMenuItemNavigation(itemPositionNavi: Int) {
             /**   Toast.makeText(this@MainActivity, itemPositionNavi.toString(),Toast.LENGTH_SHORT).show()**/
@@ -109,7 +125,7 @@ class MainActivity : AppCompatActivity() {
             fragmentManager.popBackStack(BACK_STACK_MAIN, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         } else {
             showDialogCloseApp()
- //           super.onBackPressed()
+            //           super.onBackPressed()
         }
     }
 

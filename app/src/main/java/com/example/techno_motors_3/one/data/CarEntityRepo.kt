@@ -11,8 +11,8 @@ class CarEntityRepo: CarEntityContract {
         carEntity = CarEntity(model,service_type)
     }
 
-    override fun updateCarEntity(carEntity: CarEntity) {
-        this.carEntity = carEntity
+    override fun updateCarEntity(carEntityUpdate: CarEntity) {
+        this.carEntity = carEntityUpdate
     }
 
     override fun loadCarFromPreferences() {

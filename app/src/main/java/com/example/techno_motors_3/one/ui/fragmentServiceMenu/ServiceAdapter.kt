@@ -35,7 +35,6 @@ class ServiceAdapter(
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
-
         val convertView =
             LayoutInflater.from(context).inflate(R.layout.item_menu_list, parent, false)
 
@@ -44,6 +43,9 @@ class ServiceAdapter(
 
         menuIcon.setImageResource(menuList[position].getOrNull(0) as Int)
         menuItem.text = context.resources.getString(menuList[position].getOrNull(1) as Int)
+
+        /**Логика переключения меню фрагментов
+         * к текущему item прибавляем  +300  */
 
         menuItem.setOnClickListener {
                onItemClickListenerServiceFragment.onItemClick(position+300)

@@ -10,17 +10,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.WriteToServiceBinding
 import androidx.appcompat.app.ActionBar
 import com.example.techno_motors_3.one.App
-import com.example.techno_motors_3.one.domain.CarEntity
 
 
 class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
 
     private val TAG = "@@@"
+    private val modelList by lazy { resources.getStringArray(R.array.item_menu_model_list) }
+    private val serviceList by lazy { resources.getStringArray(R.array.item_TO) }
 
     private var _binding: WriteToServiceBinding? = null
     private val binding
@@ -40,49 +40,45 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
     ): View? {
         Log.d(TAG, "onCreateView: ")
         val view = inflater.inflate(R.layout.write_to_service, container, false)
+        // init binding
         _binding = WriteToServiceBinding.bind(view)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // init textView field
         binding.tvSelectModel.text = carEntityRepo.getCar().model
         binding.tvSelectService.text = carEntityRepo.getCar().service_type
-        binding.tvSelectModel.setOnClickListener {
-            dialog(binding.tvSelectModel)
-        }
+
+        fillTextViewField()
+
         super.onViewCreated(view, savedInstanceState)
     }
 
+    private fun fillTextViewField() {
+        binding.tvSelectModel.setOnClickListener {
+            dialogForSelection(binding.tvSelectModel, modelList)
+        }
+
+        binding.tvSelectService.setOnClickListener {
+            dialogForSelection(binding.tvSelectService, serviceList)
+        }
+    }
+
+    private fun dialogForSelection(selectTextView: TextView, menuList: Array<String>) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Выбрать модель автомобиля")
+            .setItems(menuList, DialogInterface.OnClickListener { dialog, which ->
+                selectTextView.text = menuList[which]
+//                carEntityRepo.updateCarEntity(CarEntity(model = catNames[which])) // обновили значение класса модели
+            })
+            .show()
+    }
 
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
     }
-
-    private fun dialog(selectTextView: TextView) {
-        val catNames = arrayOf(
-            "Васька", "Рыжик", "Мурзик", "Васька", "Рыжик", "Мурзик",
-            "Васька", "Рыжик", "Мурзик", "Васька", "Рыжик", "Мурзик", "Васька", "Рыжик", "Мурзик"
-        )
-
-
-        AlertDialog.Builder(requireContext())
-            .setTitle("Выбрать модель автомобиля")
-            .setItems(catNames, DialogInterface.OnClickListener { dialog, which ->
-                Toast.makeText(
-                    activity, "Выбранный кот: ${catNames[which]}",
-                    Toast.LENGTH_SHORT
-
-                ).show()
-                selectTextView.text = catNames[which]
-
-                carEntityRepo.updateCarEntity(CarEntity(model = catNames[which])) // обновили значение модели
-                Log.d(TAG, "dialog: " + carEntityRepo.getCar().model)
-            })
-            .show()
-
-    }
-
 
 }
 

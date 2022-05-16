@@ -14,7 +14,8 @@ import com.example.techno_motors_3.databinding.ServiceFragmentBinding
 import com.example.techno_motors_3.one.ui.main.OnClickNavigationFragment
 
 
-/**  задача этого фрагмента - просто меню, которое переключает на другие фрагменты*/
+/**  задача этого фрагмента - просто меню, которое переключает на другие фрагменты
+ * основная навигация в main activity*/
 
 private const val WRITE_TO_SERVICE = 300
 private const val CALK_SERVICE = 301
