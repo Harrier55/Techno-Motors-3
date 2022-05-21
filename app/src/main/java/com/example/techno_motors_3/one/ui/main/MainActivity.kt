@@ -2,6 +2,7 @@ package com.example.techno_motors_3.one.ui.main
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -13,20 +14,16 @@ import com.example.techno_motors_3.one.ui.fragmentContact.ContactFragment
 import com.example.techno_motors_3.one.ui.fragmentHomeMenu.HomeFragment
 import com.example.techno_motors_3.one.ui.fragmentServiceMenu.ServiceFragment
 import com.example.techno_motors_3.one.ui.fragmentWriteToservice.WriteToServiceFragment
+import com.example.techno_motors_3.one.util.Constants
 
 private const val BACK_STACK_MAIN = "BACK_STACK_MAIN"
 
-private const val WRITE_TO_SERVICE = 300
-private const val CALK_SERVICE = 301
-private const val WRITE_TO_REPAIR = 302
-private const val MATERIALS = 303
-private const val CAPACITY = 304
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val fragmentManager by lazy { supportFragmentManager }
 
-    /**был вариант такой инициализации actionBar, но он потребовал проверки на null*/
+    /**был вариант такой инициализации actionBar, но он требовал проверки на null*/
     //    private val actionBar by lazy { this.supportActionBar }
     private lateinit var actionBar: androidx.appcompat.app.ActionBar
     private val homeFragment by lazy { HomeFragment(actionBar) }
@@ -70,27 +67,24 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigationFragmentsMain(itemPositionNavi: Int) {
         when (itemPositionNavi) {
-            WRITE_TO_SERVICE -> {
+            Constants.GO_WRITE_TO_SERVICE -> {
                 launchFragmentWithPopToBackStack(writeToServiceFragment)
+            }
+            Constants.GO_WRITE_TO_REPAIR ->{
+                //todo
             }
         }
     }
 
-    /**ЛОГИКА ПЕРКЛЮЧЕНИЯ ФРАГМЕНТОВ*/
-
-    /**логика переключения такая - так как каждый список передает по клику какое то число
-     * от 0 до ..., и чтобы их разделить применим, если это, например ServiceFragment, то
-     * прибавляем + 300, таким образоим получается, что
-     * private const val WRITE_TO_SERVICE = 300
-     *
-     * аналогично с другими фрагментами
-     * Новости   +100
-     * Автосалон    +200*/
+    /**логика переключения фрагментов в использовании для каждого фрагмента
+     * своего идентификатора - константы
+     * они перечислены в классе Constants
+     * и навигация реализована в navigationFragmentsMain*/
 
     /** callback для навигации переключения фрагментов*/
     private val onClickNavigationFragment = object : OnClickNavigationFragment {
         override fun onClickMenuItemNavigation(itemPositionNavi: Int) {
-            /**   Toast.makeText(this@MainActivity, itemPositionNavi.toString(),Toast.LENGTH_SHORT).show()**/
+//            Toast.makeText(this@MainActivity, itemPositionNavi.toString(), Toast.LENGTH_SHORT).show()
             navigationFragmentsMain(itemPositionNavi)
         }
     }

@@ -11,15 +11,17 @@ private const val WRITE_TO_REPAIR = 2
 private const val MATERIALS = 3
 private const val CAPACITY = 4
 
+/** Пока нтгде не используется*/
+
 class ServiceViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val menuList by lazy {
-        App.myAppInstance.getResourceProvider().getMenuServiceFragment()
-    }
+//    private val menuList by lazy {
+//        App.myAppInstance.getResourceProvider().getMenuServiceFragment()
+//    }
     private var menu = MutableLiveData<MutableList<List<Any>>>()
 
     init {
-        menu.postValue(menuList)
+//        menu.postValue(menuList)
     }
 
     fun getMenu():MutableLiveData<MutableList<List<Any>>>{

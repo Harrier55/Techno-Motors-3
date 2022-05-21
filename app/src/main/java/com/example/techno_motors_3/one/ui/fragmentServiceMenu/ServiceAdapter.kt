@@ -2,6 +2,7 @@ package com.example.techno_motors_3.one.ui.fragmentServiceMenu
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +13,10 @@ import com.example.techno_motors_3.R
 
 class ServiceAdapter(
     private val context: Context,
-    private val onItemClickListenerServiceFragment: OnItemClickListenerServiceFragmentAdapter
-
+    private val callBackFromAdapter: CallBackFromAdapter,
+    private val menuList: MutableList<List<Any>>
 ) : BaseAdapter() {
 
-    private var menuList: MutableList<List<Any>> = mutableListOf()
-
-    fun refreshListMenu(menuList: MutableList<List<Any>>){
-        this.menuList = menuList
-        notifyDataSetChanged()
-    }
     override fun getCount() = menuList.size
 
     override fun getItem(position: Int): Any {
@@ -35,21 +30,23 @@ class ServiceAdapter(
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
-        val convertView =
+        val view =
             LayoutInflater.from(context).inflate(R.layout.item_menu_list, parent, false)
 
-        val menuIcon = convertView.findViewById<ImageView>(R.id.item_service_icon)
-        val menuItem = convertView.findViewById<TextView>(R.id.item_service_text)
+        val menuIcon = view.findViewById<ImageView>(R.id.item_service_icon)
+        val menuItem = view.findViewById<TextView>(R.id.item_service_text)
 
-        menuIcon.setImageResource(menuList[position].getOrNull(0) as Int)
-        menuItem.text = context.resources.getString(menuList[position].getOrNull(1) as Int)
+        /**через getOrNull получаем элемент списка по индексу*/
+        menuIcon.setImageResource(menuList[position].getOrNull(1) as Int)
+        menuItem.text = context.resources.getString(menuList[position].getOrNull(2) as Int)
 
         /**Логика переключения меню фрагментов
-         * к текущему item прибавляем  +300  */
-
+         * переключается по ID списка, а это нулевой элемент конкретного List
+         * константы для этих ID общие для всего приложения*/
         menuItem.setOnClickListener {
-               onItemClickListenerServiceFragment.onItemClick(position+300)
+            callBackFromAdapter.onItemClick(menuList[position].getOrNull(0)as Int)
+            Log.d("@@@", "getView: " +menuList[position].getOrNull(0)as Int )
         }
-        return convertView
+        return view
     }
 }

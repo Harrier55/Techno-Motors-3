@@ -4,35 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.ListFragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.ServiceFragmentBinding
+import com.example.techno_motors_3.one.App
 import com.example.techno_motors_3.one.ui.main.OnClickNavigationFragment
-
 
 /**  задача этого фрагмента - просто меню, которое переключает на другие фрагменты
  * основная навигация в main activity*/
-
-private const val WRITE_TO_SERVICE = 300
-private const val CALK_SERVICE = 301
-private const val WRITE_TO_REPAIR = 302
-private const val MATERIALS = 303
-private const val CAPACITY = 304
-
 class ServiceFragment(private val actionBar: ActionBar,
                       private val onClickNavigationFragment: OnClickNavigationFragment) :
     ListFragment() {
     private var _binding: ServiceFragmentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel by lazy { ViewModelProvider(this)[ServiceViewModel::class.java] }
+//    private val viewModel by lazy { ViewModelProvider(this)[ServiceViewModel::class.java] }
+    private val menuList by lazy {
+        App.myAppInstance.getResourceProvider().getMenuServiceFragment()
+    }
     private val adapter by lazy {
         ServiceAdapter(
             requireContext(),
-            onItemClickListenerServiceFragment
+            callBackFromAdapter,
+            menuList
         )
     }
 
@@ -44,9 +38,6 @@ class ServiceFragment(private val actionBar: ActionBar,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.list.adapter = adapter
-        viewModel.getMenu().observe(viewLifecycleOwner, Observer {
-            adapter.refreshListMenu(it)
-        })
     }
 
     override fun onCreateView(
@@ -63,14 +54,11 @@ class ServiceFragment(private val actionBar: ActionBar,
         super.onDestroy()
     }
 
-    private val onItemClickListenerServiceFragment =
-        object : OnItemClickListenerServiceFragmentAdapter {
+    private val callBackFromAdapter =
+        object : CallBackFromAdapter {
             override fun onItemClick(position: Int) {
                 onClickNavigationFragment.onClickMenuItemNavigation(position)
             }
         }
-
-
-
 
 }
