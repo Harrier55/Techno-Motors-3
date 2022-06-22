@@ -8,11 +8,16 @@
     <string name="promotion_button_text">записаться</string>
     <string name="header_text_home_fragment">Наши акции</string>
 
+// Элементы менюшки фрагмента Сервиса
     <string name="title_write_to_service_fragment">Запись на ТО</string>
     <string name="calc_service">Калькулятор ТО</string>
     <string name="write_to_repair">Запись на ремонт</string>
     <string name="materials">Рекомендуемые расходные материалы</string>
     <string name="capacity">Заправочные объемы</string>
+
+// Заголовки для диаложков в фрагменте запись на ТО
+    <string name="modelList">Выбрать модель автомобиля</string>
+    <string name="serviceList">Выбрать обслуживание</string>
 
 
     <string-array name="item_menu_model_list">

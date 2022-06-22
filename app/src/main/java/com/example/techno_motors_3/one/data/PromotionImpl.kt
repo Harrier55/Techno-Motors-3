@@ -24,7 +24,7 @@ class PromotionImpl : PromotionEntityContract {
         return ArrayList<PromotionEntity>(cashListPromotions)
     }
 
-    fun mockRepo() {
+    fun mockRepo() {  // репозиторий заглушка
         createEntity(
             PromotionEntity(
                 "Весенняя диагностика автомобиля",

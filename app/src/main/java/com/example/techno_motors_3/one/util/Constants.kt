@@ -1,5 +1,5 @@
 package com.example.techno_motors_3.one.util
-
+/** Класс для хранения констант */
 
 class Constants {
     companion object {
