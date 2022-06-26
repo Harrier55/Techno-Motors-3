@@ -2,7 +2,6 @@ package com.example.techno_motors_3.one.ui.main
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -76,9 +75,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    /**логика переключения фрагментов в использовании для каждого фрагмента
+    /**логика переключения фрагментов :
+     *  Используем  для каждого фрагмента
      * своего идентификатора - константы
-     * они перечислены в классе Constants
+     * которые  перечислены в классе Constants
      * и навигация реализована в navigationFragmentsMain*/
 
     /** callback для навигации переключения фрагментов*/

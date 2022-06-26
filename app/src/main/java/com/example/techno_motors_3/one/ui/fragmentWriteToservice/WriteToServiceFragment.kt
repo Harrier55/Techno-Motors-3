@@ -4,15 +4,22 @@ package com.example.techno_motors_3.one.ui.fragmentWriteToservice
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.WriteToServiceBinding
 import com.example.techno_motors_3.one.App
+import com.example.techno_motors_3.one.domain.CarEntity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /** Фрагмент выполняет сбор данных с помощью Диаложков, заполняет форму
  * и отправляет запрос "Запись на ТО " на сервер и возвращает результат в
@@ -20,6 +27,8 @@ import com.example.techno_motors_3.one.App
 
 /** Данные для формы автомобиля запрашиваются из Preferences ,
  * если данных еще нет, то заполняются по умолчанию в репозитории CarEntityRepo*/
+
+const val BASEURL = "http://192.168.0.111"
 
 
 class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
@@ -29,12 +38,12 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
     private val serviceList by lazy { resources.getStringArray(R.array.item_TO) }
     private val titleModelList by lazy { R.string.modelList }
     private val titleServiceList by lazy { R.string.serviceList }
+    private val carEntityRepo by lazy { App.myAppInstance.getCarEntityRepo() }
+    private val apiService by lazy { App.myAppInstance.getApiService() }
 
     private var _binding: WriteToServiceBinding? = null
     private val binding
         get() = _binding!!
-
-    private val carEntityRepo by lazy { App.myAppInstance.getCarEntityRepo() }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,14 +62,50 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-// init textView field
-        binding.tvSelectModel.text = carEntityRepo.getCar().model
-        binding.tvSelectService.text = carEntityRepo.getCar().service_type
-
-        fillTextViewField()
         super.onViewCreated(view, savedInstanceState)
+// Заполнение полей формы данными из репозитория carEntityRepo
+        //    fillToDefault()
+// заполняем текстовые поля в форме из диаложков
+        fillTextViewField()
+        binding.buttonSendFormTO.setOnClickListener {
+// подготовка формы
+            isNotNull()
+// отправка формы на сервер
+            //           webRequest()
+        }
     }
 
+    /**Подготовка  формы к отправке,  проверка на незаполненные поля*/
+    private fun isNotNull() {
+        val test = binding.tvSelectModel.text
+
+        if (binding.tvSelectModel.text.isEmpty()) {
+            binding.iconSelectModel.isVisible = true
+            showAlarm()
+        } else {
+            binding.iconSelectModel.isVisible = false
+            // todo заполняем поле класса для отправки формы
+            carEntityRepo.updateCarEntity(CarEntity(model = binding.tvSelectModel.text.toString()))
+        }
+    }
+
+    /** Отправка формы и получение уведомления об отправке */
+    private fun webRequest() {
+        val call = apiService.sendServiceRequest()
+        call.clone().enqueue(object : Callback<String> {
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if (response.isSuccessful && response.code() == 200) {
+                    notificationOfSending(response.body().toString())
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                notificationOfSending(getString(R.string.error_send_form_request))
+            }
+        })
+    }
+
+    /** Заполнение полей формы данными из Диаложков*/
     private fun fillTextViewField() {
         binding.tvSelectModel.setOnClickListener {
             dialogForSelection(binding.tvSelectModel, titleModelList, modelList)
@@ -71,6 +116,22 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
         }
     }
 
+    /** Заполнение полей формы данными из репозитория carEntityRepo*/
+    private fun fillToDefault() {
+        binding.tvSelectModel.text = carEntityRepo.getCar().model
+        binding.tvSelectService.text = carEntityRepo.getCar().service_type
+    }
+
+    /**Диаложка уведомления успеха/ошибки отправки формы*/
+    private fun notificationOfSending(send: String) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("")
+            .setMessage(send)
+            .show()
+    }
+
+
+    /** Диаложка для заполнения формы выбора модели, ТО и пр.*/
     private fun dialogForSelection(
         selectTextView: TextView,
         titleDialog: Int,
@@ -85,14 +146,19 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
             .show()
     }
 
+    private fun showAlarm() {
+        Toast.makeText(
+            requireContext(),
+            "Заполните, пожалуйста, недостающие поля",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
     override fun onDestroy() {
         _binding = null
         super.onDestroy()
     }
 
 }
-
-
-
 
 

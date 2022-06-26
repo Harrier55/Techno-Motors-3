@@ -7,7 +7,7 @@ class CarEntityRepo : CarEntityContract {
 
     private lateinit var carEntity: CarEntity
 
-    override fun createNewCar(model: String, service_type: String) {
+    private fun createNewCar(model: String?, service_type: String?) {
         carEntity = CarEntity(model, service_type)
     }
 
@@ -32,11 +32,8 @@ class CarEntityRepo : CarEntityContract {
             /** если данные в Preferences есть, то заполняем метод createNewCar здесь */
 
         } else {
-            /**  если данных в  Preferences нет, то делаем некую начальную заглушку**/
-            createNewCar(
-                "выбрать модель  (class CarEntityRepo)",
-                "выбрать обслуживание (class CarEntityRepo)"
-            )
+            /**  если данных в  Preferences нет, то делаем некую начальную заполнение данных формы**/
+            createNewCar(null, null)
         }
     }
 }

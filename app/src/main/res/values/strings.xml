@@ -18,8 +18,23 @@
 // Заголовки для диаложков в фрагменте запись на ТО
     <string name="modelList">Выбрать модель автомобиля</string>
     <string name="serviceList">Выбрать обслуживание</string>
+    <string name="error_send_form_request">Возникла ошибка при передаче данных</string>
+
+//  Фрагмент Запись на сервис
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="car_model">Модель автомобиля</string>
+    <string name="select_car_model">Выбрать модель автомобиля</string>
+    <string name="car_maintenance">Техническое обслуживание</string>
+    <string name="select_car_maintenance">Выбрать тип ТО</string>
+    <string name="client_contacts">Контактные данные</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="select_phone_number">внести номер телефона.</string>
+    <string name="client_name">Владелец автомобиля</string>
+    <string name="select_client_name">Внести имя владельца</string>
+    <string name="send_form_maintenance">Отправить заявку</string>
 
 
+// Массивы списков
     <string-array name="item_menu_model_list">
         <item>Rio FB(III поколение)</item>
         <item>Rio (IV поколение реслайлинг)</item>
@@ -87,6 +102,7 @@
 
     </string-array>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 
 </resources>
