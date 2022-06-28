@@ -4,7 +4,6 @@ package com.example.techno_motors_3.one.ui.fragmentWriteToservice
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,27 +64,56 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 // Заполнение полей формы данными из репозитория carEntityRepo
         //    fillToDefault()
-// заполняем текстовые поля в форме из диаложков
+// заполняем текстовые поля в форме из списков в диаложках
         fillTextViewField()
+
+// нажание кнопки ОТПРАВИТЬ
         binding.buttonSendFormTO.setOnClickListener {
 // подготовка формы
-            isNotNull()
+            preparationOfForm()
 // отправка формы на сервер
             //           webRequest()
         }
     }
 
-    /**Подготовка  формы к отправке,  проверка на незаполненные поля*/
-    private fun isNotNull() {
-        val test = binding.tvSelectModel.text
+    /**Подготовка  формы к отправке,  проверка на незаполненные поля, заполнение полей класса Profile*/
+    private fun preparationOfForm() {
+        val test = binding.tvSelectModel
 
         if (binding.tvSelectModel.text.isEmpty()) {
             binding.iconSelectModel.isVisible = true
             showAlarm()
         } else {
             binding.iconSelectModel.isVisible = false
-            // todo заполняем поле класса для отправки формы
+       //  заполняем поле класса для отправки формы
             carEntityRepo.updateCarEntity(CarEntity(model = binding.tvSelectModel.text.toString()))
+        }
+
+        if (binding.tvSelectService.text.isEmpty()) {
+            binding.iconSelectService.isVisible = true
+            showAlarm()
+        } else {
+            binding.iconSelectService.isVisible = false
+            //  заполняем поле класса для отправки формы
+            carEntityRepo.updateCarEntity(CarEntity(service_type = binding.tvSelectService.text.toString()))
+        }
+
+        if (binding.tvSelectName.text.isEmpty()) {
+            binding.iconSelectName.isVisible = true
+            showAlarm()
+            //  todo вызываем диалог для заполнения данных о клиенте
+        } else {
+            binding.iconSelectName.isVisible = false
+            //  todo заполняем поле класса для отправки формы
+        }
+
+        if (binding.tvSelectNumberPhone.text.isEmpty()) {
+            binding.iconSelectNumberPhone.isVisible = true
+            showAlarm()
+            //  todo вызываем диалог для заполнения данных о клиенте
+        } else {
+            binding.iconSelectNumberPhone.isVisible = false
+            //  todo заполняем поле класса для отправки формы
         }
     }
 
