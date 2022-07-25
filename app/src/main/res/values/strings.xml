@@ -18,7 +18,7 @@
 // Заголовки для диаложков в фрагменте запись на ТО
     <string name="modelList">Выбрать модель автомобиля</string>
     <string name="serviceList">Выбрать обслуживание</string>
-    <string name="error_send_form_request">Возникла ошибка при передаче данных</string>
+    <string name="error_send_form_request">Возникла ошибка при передаче данных, попродуйте еще раз</string>
 
 //  Фрагмент Запись на сервис
     <string name="hello_blank_fragment">Hello blank fragment</string>

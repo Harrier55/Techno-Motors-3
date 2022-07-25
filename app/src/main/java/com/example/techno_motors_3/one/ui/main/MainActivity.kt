@@ -15,9 +15,6 @@ import com.example.techno_motors_3.one.ui.fragmentServiceMenu.ServiceFragment
 import com.example.techno_motors_3.one.ui.fragmentWriteToservice.WriteToServiceFragment
 import com.example.techno_motors_3.one.util.Constants
 
-private const val BACK_STACK_MAIN = "BACK_STACK_MAIN"
-
-
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val fragmentManager by lazy { supportFragmentManager }
@@ -45,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     private fun initRepo() {
         /**первоначальная инициализация для проверки. Если есть данные в Preferences
          * то грузим их, иначе создаем новый объект CarEntity*/
-        App.myAppInstance.getCarEntityRepo().checkSavedStateCarEntity()
+        App.myAppInstance.getProfile().checkSavedStateProfileEntity()
 
         /**mock для репозитория Новости (первая страница)*/
         App.myAppInstance.getRepoPromotions().mockRepo() // create test mock repo
@@ -60,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     private fun launchFragmentWithPopToBackStack(fragment: Fragment) {
         fragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
-            .addToBackStack(BACK_STACK_MAIN)
+            .addToBackStack(Constants.BACK_STACK_MAIN)
             .commit()
     }
 
@@ -116,7 +113,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (fragmentManager.backStackEntryCount != 0) {
-            fragmentManager.popBackStack(BACK_STACK_MAIN, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            fragmentManager.popBackStack(Constants.BACK_STACK_MAIN, FragmentManager.POP_BACK_STACK_INCLUSIVE)
         } else {
             showDialogCloseApp()
             //           super.onBackPressed()

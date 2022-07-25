@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -30,18 +31,18 @@ import retrofit2.Response
 
 //const val BASEURL = "http://192.168.0.111"
 
-
 class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
 
-    private val TAG = "@@@"
+    //    private val TAG = "@@@"
     private val modelList by lazy { resources.getStringArray(R.array.item_menu_model_list) }
     private val serviceList by lazy { resources.getStringArray(R.array.item_TO) }
     private val titleModelList by lazy { R.string.modelList }
     private val titleServiceList by lazy { R.string.serviceList }
-    private val carEntityRepo by lazy { App.myAppInstance.getCarEntityRepo() }
+    private val profileRepo by lazy { App.myAppInstance.getProfile() }
     private val apiService by lazy { App.myAppInstance.getApiService() }
     private val serviceRequestForm by lazy { ServiceRequestForm() }
     private var counterForCheckNonNullField: Int = 0
+    private var isSendingFormToServer: Boolean = true // флаг-  форма не отправлена
 
     private var _binding: WriteToServiceBinding? = null
     private val binding
@@ -72,17 +73,37 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
 
         /** нажание кнопки ОТПРАВИТЬ */
         binding.buttonSendFormTO.setOnClickListener {
-            // проверка  формы, чтобы значения были заполнены
-            checkingForNonEmptyValues()
-            // заполнить класс для отправки данных на сервер
-            fillClassForSending()
-            // todo заполнить профиль обновленными данными
-            fillClassProfile()
-            // отправка формы на сервер
-            webRequest()
+            if (isSendingFormToServer) {
+                /** если  форма еще не отпралялась, то проверяем и отправляем ее*/
+                sendFormDataToServer()
+            } else {
+                Toast.makeText(requireContext(),"куда то выходим", Toast.LENGTH_SHORT).show()
+                isSendingFormToServer = true
+            }
         }
     }
-    //  класс для отправки данных на сервер
+
+   /** проверка на заполнение данных и отправка формы*/
+    private fun sendFormDataToServer() {
+        // проверка  формы, чтобы значения были заполнены
+        checkingForNonEmptyValues()
+
+        // заполнить класс для отправки данных на сервер
+        fillClassForSending()
+
+        // todo заполнить профиль обновленными данными
+        fillClassProfile()
+
+        // отправка формы на сервер
+        if (counterForCheckNonNullField == 4) {
+            binding.buttonSendFormTO.isClickable = false
+            webRequest()
+        } else {
+            showAlarmEmptyValues()
+        }
+    }
+
+    /** формируем класс для отправки данных на сервер */
     private fun fillClassForSending() {
         serviceRequestForm.model = binding.tvSelectModel.text.toString()
         serviceRequestForm.service_type = binding.tvSelectService.text.toString()
@@ -90,24 +111,25 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
         serviceRequestForm.phone = binding.tvSelectNumberPhone.text?.toString()
     }
 
+    /** записать данные формы в Профиль */
     private fun fillClassProfile() {
-        carEntityRepo.updateProfile(mapOf(Constants.MODEL to binding.tvSelectModel.text.toString()))
-        carEntityRepo.updateProfile(mapOf(Constants.SERVICE_TYPE to binding.tvSelectService.text.toString()))
+        profileRepo.updateProfile(mapOf(Constants.MODEL to binding.tvSelectModel.text.toString()))
+        profileRepo.updateProfile(mapOf(Constants.SERVICE_TYPE to binding.tvSelectService.text.toString()))
     }
 
-
-    /**Подготовка  формы к отправке,  проверка на незаполненные поля*/
+    /**Подготовка  формы к отправке,  проверка на незаполненные поля
+     * счетчик считает количество заполненных полей*/
     private fun checkingForNonEmptyValues() {
         counterForCheckNonNullField = 0
 
-        if (binding.tvSelectModel.text.isEmpty()) {
+        if (binding.tvSelectModel.text?.length == 0) {
             binding.iconSelectModel.isVisible = true
         } else {
             binding.iconSelectModel.isVisible = false
             counterForCheckNonNullField++
         }
 
-        if (binding.tvSelectService.text.isEmpty()) {
+        if (binding.tvSelectService.text?.length == 0) {
             binding.iconSelectService.isVisible = true
         } else {
             binding.iconSelectService.isVisible = false
@@ -129,11 +151,8 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
         }
     }
 
-    /** Отправка формы и получение уведомления об отправке */
-    /** проверка, чтобы все значения были заполнены - счетчик считает количество заполненных полей
-     * если все поля заполнены, то выплняется запрос */
+    /** Web запрос и получение ответа */
     private fun webRequest() {
-        if (counterForCheckNonNullField == 4) {
 
             val call = apiService.sendServiceRequest(serviceRequestForm)
             call.clone().enqueue(object : Callback<String> {
@@ -142,14 +161,11 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
                         notificationOfSending(response.body().toString())
                     }
                 }
-
                 override fun onFailure(call: Call<String>, t: Throwable) {
                     notificationOfSending(getString(R.string.error_send_form_request))
+                    // todo желательно обработать ошибку
                 }
             })
-        } else {
-            showAlarmEmptyValues()
-        }
     }
 
     /** Заполнение полей формы данными из Диаложков*/
@@ -163,15 +179,19 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
         }
     }
 
-    /** Заполнение полей формы данными из репозитория carEntityRepo*/
+    /** Заполнение полей формы данными из репозитория Профиля*/
     private fun fillToDefault() {
-        binding.tvSelectModel.text = carEntityRepo.getprofile().model
-        binding.tvSelectService.text = carEntityRepo.getprofile().service_type
+        binding.tvSelectModel.text = profileRepo.getProfile().model
+
     }
 
-    /**Диаложка уведомления успеха/ошибки отправки формы*/
+    /**Диаложка уведомления успеха отправки формы*/
     private fun notificationOfSending(send: String) {
+        isSendingFormToServer = false // ДА - форма отправлен успешно
+        binding.buttonSendFormTO.isClickable = true
+        binding.buttonSendFormTO.text = "Закрыть форму и выйти"
         MyDialogs.notificationOfSending(requireContext(), send)
+
     }
 
     /** Диаложка для заполнения формы выбора модели, ТО и пр.*/
@@ -188,7 +208,7 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
             .show()
     }
 
-    /** сообщение, что не все поля заполнены */
+    /** Диаложка, что не все поля заполнены */
     private fun showAlarmEmptyValues() {
         MyDialogs.notificationOfSending(requireContext(), R.string.please_fill_in_the_fields)
     }

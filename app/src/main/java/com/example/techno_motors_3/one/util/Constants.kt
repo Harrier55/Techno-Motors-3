@@ -3,6 +3,7 @@ package com.example.techno_motors_3.one.util
 
 class Constants {
     companion object {
+        const val BACK_STACK_MAIN = "BACK_STACK_MAIN"
         /**меню Автосервиса*/
         const val GO_WRITE_TO_SERVICE = 300
         const val GO_CALK_SERVICE = 301

@@ -37,6 +37,7 @@ class ServiceFragment(private val actionBar: ActionBar,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        actionBar.setTitle(R.string.title_service_fragment)
         binding.list.adapter = adapter
     }
 

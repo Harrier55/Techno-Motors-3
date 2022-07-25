@@ -15,7 +15,7 @@ class App: Application() {
 
     private val promotionImpl by lazy { PromotionImpl() }
     private val resourceProvider by lazy { ResourceProvider(this) }
-    private val carEntityRepo by lazy { ProfileRepo() }
+    private val profileRepo by lazy { ProfileRepo() }
 
 
     override fun onCreate() {
@@ -39,8 +39,8 @@ class App: Application() {
 
 /** Репозиторий CarEntity*/
     @JvmName("getCarEntityRepo1")
-    fun getCarEntityRepo():ProfileRepo{
-        return carEntityRepo
+    fun getProfile():ProfileRepo{
+        return profileRepo
     }
 /** Репозиторий Акции для Главного экрана**/
     fun getRepoPromotions():PromotionImpl{
