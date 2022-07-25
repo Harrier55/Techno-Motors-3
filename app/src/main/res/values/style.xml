@@ -63,5 +63,21 @@
         <item name="strokeColor">@color/red</item>
     </style>
 
+// Диалоги
+    <style name="AlertDialogCustom" parent="android:Theme.Material.Light.Dialog.Alert">
+        <item name="android:textColor">#E91E63</item>
+        <item name="android:typeface">monospace</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:buttonBarPositiveButtonStyle">@style/positive</item>
+    </style>
+
+    <style name="positive">
+        <item name="android:textColor">#673AB7</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+
+
 
 </resources>

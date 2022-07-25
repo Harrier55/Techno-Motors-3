@@ -9,5 +9,8 @@ class Constants {
         const val GO_WRITE_TO_REPAIR = 302
         const val GO_MATERIALS = 303
         const val GO_CAPACITY = 304
+        /** константы для сущности */
+        const val MODEL = "model"
+        const val SERVICE_TYPE = "service_type"
     }
 }

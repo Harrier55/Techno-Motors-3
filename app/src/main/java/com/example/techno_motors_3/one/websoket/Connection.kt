@@ -22,20 +22,23 @@ class Connection {
         .build()
 
     private val apiServiceRequest = retrofit.create(ServerApi::class.java)
-    val call = apiServiceRequest.sendServiceRequest()
+//    val call = apiServiceRequest.sendServiceRequest()
+
+// for test
+
 
 fun req(){
 
-    call.enqueue(object : Callback<String>{
-        override fun onResponse(call: Call<String>, response: Response<String>) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onFailure(call: Call<String>, t: Throwable) {
-            TODO("Not yet implemented")
-        }
-
-    })
+//    call.enqueue(object : Callback<String>{
+//        override fun onResponse(call: Call<String>, response: Response<String>) {
+//            TODO("Not yet implemented")
+//        }
+//
+//        override fun onFailure(call: Call<String>, t: Throwable) {
+//            TODO("Not yet implemented")
+//        }
+//
+//    })
 }
 
 

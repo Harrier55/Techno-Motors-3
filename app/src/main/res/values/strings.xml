@@ -32,9 +32,10 @@
     <string name="client_name">Владелец автомобиля</string>
     <string name="select_client_name">Внести имя владельца</string>
     <string name="send_form_maintenance">Отправить заявку</string>
+    <string name="please_fill_in_the_fields">Заполните, пожалуйста, недостающие поля</string>
 
 
-// Массивы списков
+    // Массивы списков
     <string-array name="item_menu_model_list">
         <item>Rio FB(III поколение)</item>
         <item>Rio (IV поколение реслайлинг)</item>

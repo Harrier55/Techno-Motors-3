@@ -15,7 +15,8 @@ import androidx.fragment.app.Fragment
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.WriteToServiceBinding
 import com.example.techno_motors_3.one.App
-import com.example.techno_motors_3.one.domain.CarEntity
+import com.example.techno_motors_3.one.util.Constants
+import com.example.techno_motors_3.one.util.MyDialogs
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,9 +26,9 @@ import retrofit2.Response
  * виде сообщения, что запрос успешно доставлен */
 
 /** Данные для формы автомобиля запрашиваются из Preferences ,
- * если данных еще нет, то заполняются по умолчанию в репозитории CarEntityRepo*/
+ * если данных еще нет, то они заполняются из Диаложков*/
 
-const val BASEURL = "http://192.168.0.111"
+//const val BASEURL = "http://192.168.0.111"
 
 
 class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
@@ -39,6 +40,7 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
     private val titleServiceList by lazy { R.string.serviceList }
     private val carEntityRepo by lazy { App.myAppInstance.getCarEntityRepo() }
     private val apiService by lazy { App.myAppInstance.getApiService() }
+    private var counterForCheckNonNullField: Int = 0
 
     private var _binding: WriteToServiceBinding? = null
     private val binding
@@ -62,79 +64,91 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-// Заполнение полей формы данными из репозитория carEntityRepo
-        //    fillToDefault()
-// заполняем текстовые поля в форме из списков в диаложках
-        fillTextViewField()
+        // todo Заполнение полей формы данными из репозитория Profile
+        // fillToDefault()
+        /** заполняем текстовые поля в форме из диаложков */
+        fillFieldFromDialog()
 
-// нажание кнопки ОТПРАВИТЬ
+        /** нажание кнопки ОТПРАВИТЬ */
         binding.buttonSendFormTO.setOnClickListener {
-// подготовка формы
-            preparationOfForm()
-// отправка формы на сервер
-            //           webRequest()
+            // проверка  формы, чтобы значения были заполнены
+            checkingForNonEmptyValues()
+            // todo заполнить класс для отправки данных на сервер
+            // todo заполнить профиль обновленными данными
+            fillClassProfile()
+            // отправка формы на сервер
+            webRequest()
         }
     }
 
-    /**Подготовка  формы к отправке,  проверка на незаполненные поля, заполнение полей класса Profile*/
-    private fun preparationOfForm() {
-        val test = binding.tvSelectModel
+    private fun fillClassForSending() {
+            // todo заполнить класс для отправки данных на сервер
+    }
+
+    private fun fillClassProfile() {
+        carEntityRepo.updateCarEntity(mapOf(Constants.MODEL to binding.tvSelectModel.text.toString()))
+        carEntityRepo.updateCarEntity(mapOf(Constants.SERVICE_TYPE to binding.tvSelectService.text.toString()))
+    }
+
+
+    /**Подготовка  формы к отправке,  проверка на незаполненные поля*/
+    private fun checkingForNonEmptyValues() {
+        counterForCheckNonNullField = 0
 
         if (binding.tvSelectModel.text.isEmpty()) {
             binding.iconSelectModel.isVisible = true
-            showAlarm()
         } else {
             binding.iconSelectModel.isVisible = false
-       //  заполняем поле класса для отправки формы
-            carEntityRepo.updateCarEntity(CarEntity(model = binding.tvSelectModel.text.toString()))
+            counterForCheckNonNullField++
         }
 
         if (binding.tvSelectService.text.isEmpty()) {
             binding.iconSelectService.isVisible = true
-            showAlarm()
         } else {
             binding.iconSelectService.isVisible = false
-            //  заполняем поле класса для отправки формы
-            carEntityRepo.updateCarEntity(CarEntity(service_type = binding.tvSelectService.text.toString()))
+            counterForCheckNonNullField++
         }
 
-        if (binding.tvSelectName.text.isEmpty()) {
+        if (binding.tvSelectName.text?.length == 0) {
             binding.iconSelectName.isVisible = true
-            showAlarm()
-            //  todo вызываем диалог для заполнения данных о клиенте
         } else {
             binding.iconSelectName.isVisible = false
-            //  todo заполняем поле класса для отправки формы
+            counterForCheckNonNullField++
         }
 
-        if (binding.tvSelectNumberPhone.text.isEmpty()) {
+        if (binding.tvSelectNumberPhone.text?.length == 0) {
             binding.iconSelectNumberPhone.isVisible = true
-            showAlarm()
-            //  todo вызываем диалог для заполнения данных о клиенте
         } else {
             binding.iconSelectNumberPhone.isVisible = false
-            //  todo заполняем поле класса для отправки формы
+            counterForCheckNonNullField++
         }
     }
 
     /** Отправка формы и получение уведомления об отправке */
+    /** проверка, чтобы все значения были заполнены - счетчик считает количество заполненных полей
+     * если все поля заполнены, то выплняется запрос */
     private fun webRequest() {
-        val call = apiService.sendServiceRequest()
-        call.clone().enqueue(object : Callback<String> {
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                if (response.isSuccessful && response.code() == 200) {
-                    notificationOfSending(response.body().toString())
-                }
-            }
+        if (counterForCheckNonNullField == 4) {
 
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                notificationOfSending(getString(R.string.error_send_form_request))
-            }
-        })
+            val call = apiService.sendServiceRequest(carEntityRepo)
+            call.clone().enqueue(object : Callback<String> {
+                override fun onResponse(call: Call<String>, response: Response<String>) {
+                    if (response.isSuccessful && response.code() == 200) {
+                        notificationOfSending(response.body().toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    notificationOfSending(getString(R.string.error_send_form_request))
+                }
+            })
+        } else {
+            showAlarmEmptyValues()
+        }
     }
 
     /** Заполнение полей формы данными из Диаложков*/
-    private fun fillTextViewField() {
+    private fun fillFieldFromDialog() {
         binding.tvSelectModel.setOnClickListener {
             dialogForSelection(binding.tvSelectModel, titleModelList, modelList)
         }
@@ -152,12 +166,8 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
 
     /**Диаложка уведомления успеха/ошибки отправки формы*/
     private fun notificationOfSending(send: String) {
-        AlertDialog.Builder(requireContext())
-            .setTitle("")
-            .setMessage(send)
-            .show()
+        MyDialogs.notificationOfSending(requireContext(), send)
     }
-
 
     /** Диаложка для заполнения формы выбора модели, ТО и пр.*/
     private fun dialogForSelection(
@@ -169,17 +179,13 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
             .setTitle(titleDialog)
             .setItems(menuList, DialogInterface.OnClickListener { dialog, which ->
                 selectTextView.text = menuList[which]
-//                carEntityRepo.updateCarEntity(CarEntity(model = catNames[which])) // обновили значение класса модели
             })
             .show()
     }
 
-    private fun showAlarm() {
-        Toast.makeText(
-            requireContext(),
-            "Заполните, пожалуйста, недостающие поля",
-            Toast.LENGTH_SHORT
-        ).show()
+    /** сообщение, что не все поля заполнены */
+    private fun showAlarmEmptyValues() {
+        MyDialogs.notificationOfSending(requireContext(), R.string.please_fill_in_the_fields)
     }
 
     override fun onDestroy() {

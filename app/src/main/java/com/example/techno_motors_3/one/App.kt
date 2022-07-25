@@ -3,12 +3,13 @@ package com.example.techno_motors_3.one
 import android.app.Application
 import com.example.techno_motors_3.one.data.CarEntityRepo
 import com.example.techno_motors_3.one.data.PromotionImpl
-import com.example.techno_motors_3.one.ui.fragmentWriteToservice.BASEURL
 import com.example.techno_motors_3.one.util.ResourceProvider
 import com.example.techno_motors_3.one.websoket.ServerApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
+
+const val BASEURL = "http://192.168.0.111"
 
 class App: Application() {
 
