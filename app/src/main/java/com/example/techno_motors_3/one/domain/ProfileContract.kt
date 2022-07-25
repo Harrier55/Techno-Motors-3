@@ -1,10 +1,10 @@
 package com.example.techno_motors_3.one.domain
 
-interface CarEntityContract {
+interface ProfileContract {
 //    fun createNewCar(model: String?, service_type: String?) // закрытый метод
     /**для обновления данных передаем ключ - значение */
-    fun updateCarEntity(map: Map<String,String>)
-    fun getCar(): CarEntity
+    fun updateProfile(map: Map<String,String>)
+    fun getprofile(): Profile
     fun loadCarFromPreferences()
     fun checkSavedStateCarEntity()
 }

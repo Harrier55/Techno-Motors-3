@@ -8,13 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.techno_motors_3.R
 import com.example.techno_motors_3.databinding.WriteToServiceBinding
 import com.example.techno_motors_3.one.App
+import com.example.techno_motors_3.one.domain.ServiceRequestForm
 import com.example.techno_motors_3.one.util.Constants
 import com.example.techno_motors_3.one.util.MyDialogs
 import retrofit2.Call
@@ -40,6 +40,7 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
     private val titleServiceList by lazy { R.string.serviceList }
     private val carEntityRepo by lazy { App.myAppInstance.getCarEntityRepo() }
     private val apiService by lazy { App.myAppInstance.getApiService() }
+    private val serviceRequestForm by lazy { ServiceRequestForm() }
     private var counterForCheckNonNullField: Int = 0
 
     private var _binding: WriteToServiceBinding? = null
@@ -73,21 +74,25 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
         binding.buttonSendFormTO.setOnClickListener {
             // проверка  формы, чтобы значения были заполнены
             checkingForNonEmptyValues()
-            // todo заполнить класс для отправки данных на сервер
+            // заполнить класс для отправки данных на сервер
+            fillClassForSending()
             // todo заполнить профиль обновленными данными
             fillClassProfile()
             // отправка формы на сервер
             webRequest()
         }
     }
-
+    //  класс для отправки данных на сервер
     private fun fillClassForSending() {
-            // todo заполнить класс для отправки данных на сервер
+        serviceRequestForm.model = binding.tvSelectModel.text.toString()
+        serviceRequestForm.service_type = binding.tvSelectService.text.toString()
+        serviceRequestForm.name = binding.tvSelectName.text?.toString()
+        serviceRequestForm.phone = binding.tvSelectNumberPhone.text?.toString()
     }
 
     private fun fillClassProfile() {
-        carEntityRepo.updateCarEntity(mapOf(Constants.MODEL to binding.tvSelectModel.text.toString()))
-        carEntityRepo.updateCarEntity(mapOf(Constants.SERVICE_TYPE to binding.tvSelectService.text.toString()))
+        carEntityRepo.updateProfile(mapOf(Constants.MODEL to binding.tvSelectModel.text.toString()))
+        carEntityRepo.updateProfile(mapOf(Constants.SERVICE_TYPE to binding.tvSelectService.text.toString()))
     }
 
 
@@ -130,7 +135,7 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
     private fun webRequest() {
         if (counterForCheckNonNullField == 4) {
 
-            val call = apiService.sendServiceRequest(carEntityRepo)
+            val call = apiService.sendServiceRequest(serviceRequestForm)
             call.clone().enqueue(object : Callback<String> {
                 override fun onResponse(call: Call<String>, response: Response<String>) {
                     if (response.isSuccessful && response.code() == 200) {
@@ -160,8 +165,8 @@ class WriteToServiceFragment(private val actionBar: ActionBar) : Fragment() {
 
     /** Заполнение полей формы данными из репозитория carEntityRepo*/
     private fun fillToDefault() {
-        binding.tvSelectModel.text = carEntityRepo.getCar().model
-        binding.tvSelectService.text = carEntityRepo.getCar().service_type
+        binding.tvSelectModel.text = carEntityRepo.getprofile().model
+        binding.tvSelectService.text = carEntityRepo.getprofile().service_type
     }
 
     /**Диаложка уведомления успеха/ошибки отправки формы*/

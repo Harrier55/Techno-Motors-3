@@ -1,23 +1,23 @@
 package com.example.techno_motors_3.one.data
 
-import com.example.techno_motors_3.one.domain.CarEntity
-import com.example.techno_motors_3.one.domain.CarEntityContract
+import com.example.techno_motors_3.one.domain.Profile
+import com.example.techno_motors_3.one.domain.ProfileContract
 import com.example.techno_motors_3.one.util.Constants
 
-class CarEntityRepo : CarEntityContract {
+class ProfileRepo : ProfileContract {
 
-    private lateinit var carEntity: CarEntity
+    private lateinit var profile: Profile
 
-    private fun createNewCar(model: String?, service_type: String?) {
-        carEntity = CarEntity(model, service_type)
+    private fun createNewEntity(model: String?, service_type: String?) {
+        profile = Profile(model, service_type)
     }
 
-    override fun updateCarEntity(map: Map<String, String>) {
+    override fun updateProfile(map: Map<String, String>) {
         val currentKey = map.keys.toString()
         val currentValue = map.values.toString()
         when {
-            currentKey.contains(Constants.MODEL) -> carEntity.model = currentValue
-            currentKey.contains(Constants.SERVICE_TYPE) -> carEntity.service_type = currentValue
+            currentKey.contains(Constants.MODEL) -> profile.model = currentValue
+            currentKey.contains(Constants.SERVICE_TYPE) -> profile.service_type = currentValue
         }
     }
     /** загружаем сохраненные данные из Preferences*/
@@ -27,8 +27,8 @@ class CarEntityRepo : CarEntityContract {
         // todo делаем createNewCar()
     }
 
-    override fun getCar(): CarEntity {
-        return carEntity
+    override fun getprofile(): Profile {
+        return profile
     }
 
     /** проверка, есть ли сохраненные данные в Preferences */
@@ -39,7 +39,7 @@ class CarEntityRepo : CarEntityContract {
 
         } else {
             /**  если данных в  Preferences нет, то делаем некую начальную заполнение данных формы**/
-            createNewCar(null, null)
+            createNewEntity(null, null)
         }
     }
 }
